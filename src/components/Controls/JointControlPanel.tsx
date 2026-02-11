@@ -8,6 +8,7 @@ import {
   IconButton,
   Button,
 } from "@mui/material";
+import type { SxProps, Theme } from "@mui/material/styles";
 import { motion } from "framer-motion";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -16,6 +17,15 @@ import StopIcon from "@mui/icons-material/Stop";
 import WarningIcon from "@mui/icons-material/Warning";
 import { useRobotStore } from "../../store/robotStore";
 import { signalRService } from "../../services/signalrService";
+
+const MuiBox = Box as any;
+
+const jointsContainerSx: SxProps<Theme> = {
+  display: "flex",
+  flexDirection: "column",
+  gap: 2.5,
+  mb: 3,
+};
 
 const JointControlPanel = () => {
   const { robotState, jointLimits } = useRobotStore();
@@ -65,7 +75,7 @@ const JointControlPanel = () => {
       </Typography>
 
       {/* Joints */}
-      <Box sx={{ display: "flex", flexDirection: "column", gap: 2.5, mb: 3 }}>
+      <MuiBox sx={jointsContainerSx}>
         {robotState.jointPositions.map((position, index) => {
           const limit = jointLimits[index];
           return (
@@ -75,8 +85,8 @@ const JointControlPanel = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
             >
-              <Box>
-                <Box
+              <MuiBox>
+                <MuiBox
                   sx={{
                     display: "flex",
                     justifyContent: "space-between",
@@ -104,9 +114,9 @@ const JointControlPanel = () => {
                   >
                     {position.toFixed(2)}°
                   </Typography>
-                </Box>
+                </MuiBox>
 
-                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                <MuiBox sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                   <IconButton
                     size="small"
                     onClick={() => handleJog(index, -1)}
@@ -169,15 +179,15 @@ const JointControlPanel = () => {
                   >
                     <AddIcon fontSize="small" />
                   </IconButton>
-                </Box>
-              </Box>
+                </MuiBox>
+              </MuiBox>
             </motion.div>
           );
         })}
-      </Box>
+      </MuiBox>
 
       {/* Action Buttons */}
-      <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
+      <MuiBox sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
         <Button
           fullWidth
           variant="outlined"
@@ -253,7 +263,7 @@ const JointControlPanel = () => {
         >
           EMERGENCY STOP
         </Button>
-      </Box>
+      </MuiBox>
     </Paper>
   );
 };

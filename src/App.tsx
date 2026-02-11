@@ -97,6 +97,8 @@ const theme = createTheme({
   },
 });
 
+const MuiBox = Box as any;
+
 function App() {
   const {
     setRobotState,
@@ -169,7 +171,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box
+      <MuiBox
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -194,7 +196,7 @@ function App() {
         <Header />
 
         {/* Main Content */}
-        <Box sx={{ display: "flex", flex: 1, overflow: "hidden" }}>
+        <MuiBox sx={{ display: "flex", flex: 1, overflow: "hidden" }}>
           {/* Sidebar */}
           <motion.div
             initial={{ x: -300, opacity: 0 }}
@@ -217,7 +219,7 @@ function App() {
                 style={{ display: "flex", flex: 1, overflow: "hidden" }}
               >
                 {/* Dashboard - Center: 3D Visualization */}
-                <Box
+                <MuiBox
                   sx={{
                     flex: 1,
                     display: "flex",
@@ -227,10 +229,10 @@ function App() {
                   }}
                 >
                   <RobotViewer3D />
-                </Box>
+                </MuiBox>
 
                 {/* Dashboard - Right Panel: Controls */}
-                <Box
+                <MuiBox
                   sx={{
                     width: 400,
                     display: "flex",
@@ -255,7 +257,7 @@ function App() {
                 >
                   <ConnectionPanel />
                   <JointControlPanel />
-                </Box>
+                </MuiBox>
               </motion.div>
             ) : (
               <motion.div
@@ -270,11 +272,11 @@ function App() {
               </motion.div>
             )}
           </AnimatePresence>
-        </Box>
+        </MuiBox>
 
         {/* Status Bar */}
         <StatusBar />
-      </Box>
+      </MuiBox>
     </ThemeProvider>
   );
 }

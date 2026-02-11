@@ -6,6 +6,8 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import InfoIcon from "@mui/icons-material/Info";
 import { useRobotStore } from "../../store/robotStore";
 
+const MuiBox = Box as any;
+
 const Header = () => {
   const { robotState, connectionStatus } = useRobotStore();
 
@@ -25,8 +27,8 @@ const Header = () => {
   };
 
   return (
-    <Box
-      sx={{
+    <div
+      style={{
         height: 70,
         background:
           "linear-gradient(180deg, rgba(21, 27, 38, 0.95) 0%, rgba(10, 14, 20, 0.95) 100%)",
@@ -35,20 +37,21 @@ const Header = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        px: 3,
+        paddingLeft: 24,
+        paddingRight: 24,
         position: "relative",
         zIndex: 1000,
         boxShadow: "0 4px 20px rgba(0, 217, 255, 0.1)",
       }}
     >
       {/* Left: Logo and Title */}
-      <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
+      <MuiBox sx={{ display: "flex", alignItems: "center", gap: 3 }}>
         <motion.div
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ duration: 0.8, type: "spring" }}
         >
-          <Box
+          <MuiBox
             sx={{
               width: 50,
               height: 50,
@@ -80,10 +83,10 @@ const Header = () => {
             >
               AR
             </Typography>
-          </Box>
+          </MuiBox>
         </motion.div>
 
-        <Box>
+        <MuiBox>
           <motion.div
             initial={{ x: -50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -119,11 +122,11 @@ const Header = () => {
               6-AXIS CONTROL SYSTEM v1.0
             </Typography>
           </motion.div>
-        </Box>
-      </Box>
+        </MuiBox>
+      </MuiBox>
 
       {/* Center: Status Indicators */}
-      <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+      <MuiBox sx={{ display: "flex", gap: 2, alignItems: "center" }}>
         <motion.div
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -162,7 +165,7 @@ const Header = () => {
             animate={{ scale: 1 }}
             transition={{ duration: 0.4, delay: 0.5 }}
           >
-            <Box
+            <MuiBox
               sx={{
                 display: "flex",
                 gap: 1,
@@ -184,7 +187,7 @@ const Header = () => {
               >
                 HOMED:
               </Typography>
-              <Box
+              <MuiBox
                 sx={{
                   width: 8,
                   height: 8,
@@ -195,13 +198,13 @@ const Header = () => {
                     : "0 0 10px rgba(255, 61, 113, 0.6)",
                 }}
               />
-            </Box>
+            </MuiBox>
           </motion.div>
         )}
-      </Box>
+      </MuiBox>
 
       {/* Right: Actions */}
-      <Box sx={{ display: "flex", gap: 1 }}>
+      <MuiBox sx={{ display: "flex", gap: 1 }}>
         <motion.div
           initial={{ scale: 0, rotate: 180 }}
           animate={{ scale: 1, rotate: 0 }}
@@ -238,8 +241,8 @@ const Header = () => {
             <SettingsIcon />
           </IconButton>
         </motion.div>
-      </Box>
-    </Box>
+      </MuiBox>
+    </div>
   );
 };
 

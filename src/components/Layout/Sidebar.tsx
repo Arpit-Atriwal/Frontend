@@ -15,13 +15,23 @@ import CodeIcon from "@mui/icons-material/Code";
 import StorageIcon from "@mui/icons-material/Storage";
 import TimelineIcon from "@mui/icons-material/Timeline";
 
+type NavigationPage = "dashboard" | "simulator";
+
+const MuiBox = Box as any;
+
 interface SidebarProps {
   currentPage: string;
-  onPageChange: (page: "dashboard" | "simulator" | string) => void;
+  onPageChange: (page: NavigationPage) => void;
 }
 
 const Sidebar = ({ currentPage, onPageChange }: SidebarProps) => {
-  const menuItems = [
+  const menuItems: Array<{
+    icon: JSX.Element;
+    label: string;
+    page: string;
+    enabled: boolean;
+    badge?: string;
+  }> = [
     {
       icon: <HomeIcon />,
       label: "Dashboard",
@@ -62,7 +72,7 @@ const Sidebar = ({ currentPage, onPageChange }: SidebarProps) => {
   ];
 
   return (
-    <Box
+    <MuiBox
       sx={{
         width: 250,
         height: "100%",
@@ -83,7 +93,11 @@ const Sidebar = ({ currentPage, onPageChange }: SidebarProps) => {
           >
             <ListItemButton
               selected={currentPage === item.page}
-              onClick={() => item.enabled && onPageChange(item.page as any)}
+              onClick={() => {
+                if (item.page === "dashboard" || item.page === "simulator") {
+                  onPageChange(item.page);
+                }
+              }}
               disabled={!item.enabled}
               sx={{
                 mx: 1,
@@ -139,7 +153,7 @@ const Sidebar = ({ currentPage, onPageChange }: SidebarProps) => {
                 }}
               />
               {item.badge && (
-                <Box
+                <MuiBox
                   sx={{
                     position: "absolute",
                     right: 8,
@@ -161,7 +175,7 @@ const Sidebar = ({ currentPage, onPageChange }: SidebarProps) => {
                   }}
                 >
                   {item.badge}
-                </Box>
+                </MuiBox>
               )}
             </ListItemButton>
           </motion.div>
@@ -169,7 +183,7 @@ const Sidebar = ({ currentPage, onPageChange }: SidebarProps) => {
       </List>
 
       {/* Info Section */}
-      <Box
+      <MuiBox
         sx={{
           position: "absolute",
           bottom: 16,
@@ -181,7 +195,7 @@ const Sidebar = ({ currentPage, onPageChange }: SidebarProps) => {
           background: "rgba(0, 217, 255, 0.05)",
         }}
       >
-        <Box
+        <MuiBox
           sx={{
             fontSize: "0.7rem",
             fontFamily: '"JetBrains Mono", monospace',
@@ -190,8 +204,8 @@ const Sidebar = ({ currentPage, onPageChange }: SidebarProps) => {
           }}
         >
           💡 TIP
-        </Box>
-        <Box
+        </MuiBox>
+        <MuiBox
           sx={{
             fontSize: "0.65rem",
             fontFamily: '"JetBrains Mono", monospace',
@@ -201,9 +215,9 @@ const Sidebar = ({ currentPage, onPageChange }: SidebarProps) => {
         >
           Use <strong style={{ color: "#00D9FF" }}>Simulator</strong> to test
           without hardware!
-        </Box>
-      </Box>
-    </Box>
+        </MuiBox>
+      </MuiBox>
+    </MuiBox>
   );
 };
 

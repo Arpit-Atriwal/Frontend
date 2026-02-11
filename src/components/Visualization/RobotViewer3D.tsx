@@ -1,11 +1,12 @@
 // src/components/Visualization/RobotViewer3D.tsx
 
-import { useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Grid, Box as DreiBox } from "@react-three/drei";
 import { Box, Paper, Typography } from "@mui/material";
 import * as THREE from "three";
 import { useRobotStore } from "../../store/robotStore";
+
+const MuiBox = Box as any;
 
 const Robot3DModel = () => {
   const { robotState } = useRobotStore();
@@ -122,7 +123,7 @@ const RobotViewer3D = () => {
         overflow: "hidden",
       }}
     >
-      <Box
+      <MuiBox
         sx={{
           position: "absolute",
           top: 16,
@@ -156,7 +157,7 @@ const RobotViewer3D = () => {
         >
           ORBIT: LEFT CLICK | PAN: RIGHT CLICK | ZOOM: SCROLL
         </Typography>
-      </Box>
+      </MuiBox>
 
       <Canvas
         camera={{ position: [3, 3, 3], fov: 50 }}

@@ -18,6 +18,8 @@ import PowerOffIcon from "@mui/icons-material/PowerOff";
 import { useRobotStore } from "../../store/robotStore";
 import { signalRService } from "../../services/signalrService";
 
+const MuiBox = Box as any;
+
 const ConnectionPanel = () => {
   const { availablePorts, robotState, setStatusMessage } = useRobotStore();
   const [selectedPort, setSelectedPort] = useState("");
@@ -59,7 +61,7 @@ const ConnectionPanel = () => {
         boxShadow: "0 4px 20px rgba(0, 217, 255, 0.1)",
       }}
     >
-      <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2.5 }}>
+      <MuiBox sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2.5 }}>
         <motion.div
           animate={{ rotate: robotState.isConnected ? 0 : [0, 10, -10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
@@ -77,7 +79,7 @@ const ConnectionPanel = () => {
         >
           CONNECTION
         </Typography>
-      </Box>
+      </MuiBox>
 
       <FormControl fullWidth sx={{ mb: 2 }}>
         <InputLabel

@@ -5,11 +5,13 @@ import { motion } from "framer-motion";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import { useRobotStore } from "../../store/robotStore";
 
+const MuiBox = Box as any;
+
 const StatusBar = () => {
   const { statusMessage, robotState } = useRobotStore();
 
   return (
-    <Box
+    <MuiBox
       sx={{
         height: 40,
         background:
@@ -23,7 +25,7 @@ const StatusBar = () => {
         gap: 3,
       }}
     >
-      <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
+      <MuiBox sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
         <motion.div
           animate={{
             scale: [1, 1.2, 1],
@@ -52,9 +54,9 @@ const StatusBar = () => {
         >
           {statusMessage}
         </Typography>
-      </Box>
+      </MuiBox>
 
-      <Box sx={{ display: "flex", gap: 4 }}>
+      <MuiBox sx={{ display: "flex", gap: 4 }}>
         <Typography
           variant="caption"
           sx={{
@@ -85,8 +87,8 @@ const StatusBar = () => {
         >
           LATENCY: <span style={{ color: "#00FF94" }}>12ms</span>
         </Typography>
-      </Box>
-    </Box>
+      </MuiBox>
+    </MuiBox>
   );
 };
 
