@@ -11,15 +11,15 @@ import {
   Switch,
   Chip,
 } from "@mui/material";
-import { motion } from "framer-motion";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
-import SpeedIcon from "@mui/icons-material/Speed";
 import TimelineIcon from "@mui/icons-material/Timeline";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Grid, Box as DreiBox } from "@react-three/drei";
 import * as THREE from "three";
+
+const MuiBox = Box as any;
 
 interface VirtualRobotState {
   jointPositions: number[];
@@ -236,9 +236,9 @@ const SimulatorPage = () => {
   ];
 
   return (
-    <Box sx={{ display: "flex", height: "calc(100vh - 110px)", gap: 2, p: 2 }}>
+    <MuiBox sx={{ display: "flex", height: "calc(100vh - 110px)", gap: 2, p: 2 }}>
       {/* Left Panel - Controls */}
-      <Box
+      <MuiBox
         sx={{
           width: 350,
           display: "flex",
@@ -257,7 +257,7 @@ const SimulatorPage = () => {
             border: "1px solid rgba(0, 217, 255, 0.2)",
           }}
         >
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2 }}>
+          <MuiBox sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2 }}>
             <TimelineIcon sx={{ color: "#00D9FF" }} />
             <Typography
               sx={{
@@ -269,9 +269,9 @@ const SimulatorPage = () => {
             >
               SIMULATOR MODE
             </Typography>
-          </Box>
+          </MuiBox>
 
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
+          <MuiBox sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
             <Chip
               label={virtualRobot.isMoving ? "MOVING" : "IDLE"}
               color={virtualRobot.isMoving ? "warning" : "success"}
@@ -282,7 +282,7 @@ const SimulatorPage = () => {
               }}
             />
 
-            <Box sx={{ display: "flex", gap: 1 }}>
+            <MuiBox sx={{ display: "flex", gap: 1 }}>
               <FormControlLabel
                 control={
                   <Switch
@@ -338,9 +338,9 @@ const SimulatorPage = () => {
                   </Typography>
                 }
               />
-            </Box>
+            </MuiBox>
 
-            <Box>
+            <MuiBox>
               <Typography
                 sx={{
                   fontFamily: '"JetBrains Mono", monospace',
@@ -368,8 +368,8 @@ const SimulatorPage = () => {
                   },
                 }}
               />
-            </Box>
-          </Box>
+            </MuiBox>
+          </MuiBox>
         </Paper>
 
         {/* Preset Motions */}
@@ -393,7 +393,7 @@ const SimulatorPage = () => {
             PRESET MOTIONS
           </Typography>
 
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+          <MuiBox sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
             {["Home", "Wave", "Reach", "Pick", "Place"].map((preset) => (
               <Button
                 key={preset}
@@ -422,7 +422,7 @@ const SimulatorPage = () => {
                 {preset}
               </Button>
             ))}
-          </Box>
+          </MuiBox>
 
           <Button
             fullWidth
@@ -484,8 +484,8 @@ const SimulatorPage = () => {
           </Typography>
 
           {virtualRobot.jointPositions.map((position, index) => (
-            <Box key={index} sx={{ mb: 2.5 }}>
-              <Box
+            <MuiBox key={index} sx={{ mb: 2.5 }}>
+              <MuiBox
                 sx={{
                   display: "flex",
                   justifyContent: "space-between",
@@ -511,7 +511,7 @@ const SimulatorPage = () => {
                 >
                   {position.toFixed(1)}°
                 </Typography>
-              </Box>
+              </MuiBox>
               <Slider
                 value={virtualRobot.targetPositions[index]}
                 onChange={(_, value) =>
@@ -527,10 +527,10 @@ const SimulatorPage = () => {
                   },
                 }}
               />
-            </Box>
+            </MuiBox>
           ))}
         </Paper>
-      </Box>
+      </MuiBox>
 
       {/* Right Panel - 3D View */}
       <Paper
@@ -544,7 +544,7 @@ const SimulatorPage = () => {
           overflow: "hidden",
         }}
       >
-        <Box
+        <MuiBox
           sx={{
             position: "absolute",
             top: 16,
@@ -576,7 +576,7 @@ const SimulatorPage = () => {
           >
             NO HARDWARE REQUIRED • SAFE TESTING ENVIRONMENT
           </Typography>
-        </Box>
+        </MuiBox>
 
         <Canvas
           camera={{ position: [3, 3, 3], fov: 50 }}
@@ -620,7 +620,7 @@ const SimulatorPage = () => {
           />
         </Canvas>
       </Paper>
-    </Box>
+    </MuiBox>
   );
 };
 

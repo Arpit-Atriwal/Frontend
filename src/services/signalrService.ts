@@ -10,9 +10,6 @@ import {
 
 class SignalRService {
   private connection: signalR.HubConnection | null = null;
-  private reconnectAttempts = 0;
-  private maxReconnectAttempts = 5;
-
   // Event handlers
   public onStateUpdate: ((state: RobotState) => void) | null = null;
   public onStatusMessage: ((message: string) => void) | null = null;
@@ -75,7 +72,6 @@ class SignalRService {
 
       this.connection.onreconnected((connectionId) => {
         console.log("SignalR reconnected", connectionId);
-        this.reconnectAttempts = 0;
         if (this.onConnectionChange) {
           this.onConnectionChange(true);
         }
